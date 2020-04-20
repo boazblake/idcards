@@ -1,3 +1,3 @@
-# Mithril Chat APP
+# Mithril ID CARDS
 
-using mithril-js and pubnub
+using mithril-js 
