@@ -1,0 +1,7 @@
+{
+  "name": "ionic-hacker-news",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "custom"
+}
