@@ -534,21 +534,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
-var toComment = function toComment(comments_count) {
-  return function (showItem) {
-    return function (id, title) {
-      return comments_count ? m("ion-link", {
-        "class": "bottom",
-        href: "/item/".concat(id),
-        onclick: function onclick() {
-          return showItem(id, title);
-        }
-      }, m("ion-badge", "".concat(comments_count, " comments"))) : m("ion-badge", "".concat(comments_count, " comments"));
-    };
-  };
-};
-
 var Post = {
   view: function view(_ref) {
     var _ref$attrs = _ref.attrs,
@@ -563,26 +548,30 @@ var Post = {
         title = _ref$attrs$post.title,
         url = _ref$attrs$post.url,
         user = _ref$attrs$post.user;
-    return m("ion-item", m("ion-grid", m("ion-header.ion-no-border", m("ion-toolbar", title)), m("ion-row", m("ion-link", "from ", m("a.", {
+    return m("ion-item", {
+      detail: true
+    }, m("ion-grid", m("ion-header.ion-no-border", m("ion-toolbar", m("h3", title))), m("ion-badge", "".concat(comments_count, " comments")), m("ion-row", m("ion-col", m("ion-grid", m("ion-row", m("ion-link", "from ", m("a.", {
       target: "_blank",
       href: url,
       rel: "noopener"
-    }, "".concat(domain)))), m("ion-item", {
-      lines: "none"
-    }, m("ion-badge", {
+    }, "".concat(domain)))), m("ion-item-group", m("ion-label", "by", m("ion-chip", {
       slot: "start",
-      onclick: function onclick() {
-        return mdl.toggleUser(mdl)(user);
-      }
-    }, user), m("ion-badge", {
-      slot: "end"
-    }, points)), m("ion-item", {
+      color: "primary" // onclick: () => mdl.toggleUser(mdl)(user),
+
+    }, user))), m("ion-item", {
       lines: "none"
     }, m("ion-badge", {
-      slot: "start"
-    }, time_ago), m("ion-badge", {
       slot: "end"
-    }, toComment(comments_count)(showItem)(id, title)))));
+    }, points), m("ion-note", {
+      slot: "start"
+    }, time_ago), comments_count && m(m.route.Link, {
+      slot: "end",
+      "class": "bottom",
+      href: "/item/".concat(id),
+      onclick: function onclick() {
+        return showItem(id, title);
+      }
+    })))))));
   }
 };
 var _default = Post;
